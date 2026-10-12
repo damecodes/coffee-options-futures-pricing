@@ -1,0 +1,335 @@
+{
+  "inputs": {
+    "spot": 1.2,
+    "rate": 0.02,
+    "storage": 0.01,
+    "conv_yield": 0.0,
+    "maturity": 0.5,
+    "strike": 1.25,
+    "vol": 0.25,
+    "net_carry": 0.03
+  },
+  "cost_of_carry": {
+    "forward": 1.2181356775388628
+  },
+  "black_scholes": {
+    "call": {
+      "price": 0.0711933299277513,
+      "d1": -0.05768291178395605,
+      "d2": -0.23445960708059294,
+      "N_d1": 0.4770006027253483,
+      "N_d2": 0.4073140940787876,
+      "delta": 0.4793915781964559,
+      "gamma": 1.8869168527976343,
+      "vega_per_vol_pt": 0.003396450335035742,
+      "theta_per_day": -0.0002763089116596812
+    },
+    "put": {
+      "price": 0.10274059708293011,
+      "d1": -0.05768291178395605,
+      "d2": -0.23445960708059294,
+      "N_d1": 0.4770006027253483,
+      "N_d2": 0.4073140940787876,
+      "delta": -0.525620942662945,
+      "gamma": 1.8869168527976343,
+      "vega_per_vol_pt": 0.003396450335035742,
+      "theta_per_day": -0.0001754543664083813
+    },
+    "call_ignoring_storage": 0.06835799021526585,
+    "put_ignoring_storage": 0.10592028240172621,
+    "per_contract_call": 2669.749872290674,
+    "per_contract_put": 3852.772390609879
+  },
+  "put_call_parity": {
+    "c_minus_p": -0.031547267155178804,
+    "disc_f_minus_k": -0.031547267155178804
+  },
+  "monte_carlo": {
+    "n_paths": 1000000,
+    "mean_ST": 1.2180984857073784,
+    "call": {
+      "price": 0.07108888701850932,
+      "std_error": 0.0001060512234558631,
+      "ci95": [
+        0.07088102662053583,
+        0.07129674741648281
+      ]
+    },
+    "put": {
+      "price": 0.10267297594026592,
+      "std_error": 7.033189910346494e-05,
+      "ci95": [
+        0.10253512541802313,
+        0.1028108264625087
+      ]
+    },
+    "prob_ITM_call": 0.407644
+  },
+  "mc_convergence": [
+    {
+      "n_paths": 1000,
+      "call": 0.07022797845605905,
+      "std_error": 0.0032504489200253857,
+      "error_vs_bs": -0.0009653514716922579
+    },
+    {
+      "n_paths": 10000,
+      "call": 0.07035323836608769,
+      "std_error": 0.0010749662164602942,
+      "error_vs_bs": -0.0008400915616636195
+    },
+    {
+      "n_paths": 100000,
+      "call": 0.07099195466203559,
+      "std_error": 0.0003354828149132713,
+      "error_vs_bs": -0.00020137526571571696
+    },
+    {
+      "n_paths": 1000000,
+      "call": 0.07108888701850932,
+      "std_error": 0.0001060512234558631,
+      "error_vs_bs": -0.00010444290924198352
+    }
+  ],
+  "jump_diffusion": {
+    "params": {
+      "lam": 0.4,
+      "mu_j": 0.15,
+      "sig_j": 0.1,
+      "k": 0.167657961105125
+    },
+    "mc": {
+      "price": 0.08002332337304455,
+      "std_error": 0.00015475732693013316,
+      "mean_ST": 1.2181882695432282,
+      "prob_ITM": 0.395156
+    },
+    "closed_form": 0.08008291898889536
+  },
+  "scenarios": [
+    {
+      "scenario": "Base case",
+      "shock": "Given inputs",
+      "spot": 1.2,
+      "vol": 0.25,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.2181356775388628,
+      "call_bs": 0.0711933299277513,
+      "call_mc": 0.07098302217553372,
+      "call_mc_se": 0.00016717989340873213,
+      "put_bs": 0.10274059708293011,
+      "call_delta": 0.4793915781964559,
+      "call_change_vs_base": 0.0,
+      "call_change_pct": 0.0,
+      "call_per_contract": 2669.749872290674
+    },
+    {
+      "scenario": "Supply: bumper Brazil harvest",
+      "shock": "Spot -15%, vol 20%",
+      "spot": 1.02,
+      "vol": 0.2,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.0354153259080334,
+      "call_bs": 0.0067639872962836824,
+      "call_mc": 0.006675689369317554,
+      "call_mc_se": 4.851357370655522e-05,
+      "put_bs": 0.2192135082061547,
+      "call_delta": 0.10416299221207115,
+      "call_change_vs_base": -0.06442934263146763,
+      "call_change_pct": -90.49912779308407,
+      "call_per_contract": 253.64952361063808
+    },
+    {
+      "scenario": "Supply: poor harvest, tight stocks",
+      "shock": "Spot +15%, vol 30%, conv. yield 4%",
+      "spot": 1.38,
+      "vol": 0.3,
+      "storage": 0.01,
+      "conv_yield": 0.04,
+      "rate": 0.02,
+      "forward": 1.3731172212859015,
+      "call_bs": 0.18116435002749573,
+      "call_mc": 0.18085496782770424,
+      "call_mc_se": 0.0002291084455141859,
+      "put_bs": 0.059272165561729345,
+      "call_delta": 0.697916395922077,
+      "call_change_vs_base": 0.10997102009974442,
+      "call_change_pct": 154.46815061375224,
+      "call_per_contract": 6793.66312603109
+    },
+    {
+      "scenario": "Demand: strong consumption growth",
+      "shock": "Spot +8%",
+      "spot": 1.296,
+      "vol": 0.25,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.3155865317419717,
+      "call_bs": 0.1256239810965741,
+      "call_mc": 0.1254007342035133,
+      "call_mc_se": 0.00018220572238995402,
+      "put_bs": 0.06069004624925054,
+      "call_delta": 0.6504077082294627,
+      "call_change_vs_base": 0.0544306511688228,
+      "call_change_pct": 76.45470611370521,
+      "call_per_contract": 4710.899291121529
+    },
+    {
+      "scenario": "Demand: recession cuts consumption",
+      "shock": "Spot -10%, vol 30%",
+      "spot": 1.08,
+      "vol": 0.3,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.0963221097849765,
+      "call_bs": 0.04012014516256645,
+      "call_mc": 0.03989538953099472,
+      "call_mc_se": 0.00015135268170216002,
+      "put_bs": 0.19226891482087347,
+      "call_delta": 0.305733395304394,
+      "call_change_vs_base": -0.031073184765184857,
+      "call_change_pct": -43.646202244955624,
+      "call_per_contract": 1504.5054435962418
+    },
+    {
+      "scenario": "Weather: frost hits Brazil",
+      "shock": "Spot +25%, vol 45%, conv. yield 5%",
+      "spot": 1.5,
+      "vol": 0.45,
+      "storage": 0.01,
+      "conv_yield": 0.05,
+      "rate": 0.02,
+      "forward": 1.485074750623752,
+      "call_bs": 0.31173782527584165,
+      "call_mc": 0.3111511863329773,
+      "call_mc_se": 0.000412374247614736,
+      "put_bs": 0.07900210750216878,
+      "call_delta": 0.74322617311078,
+      "call_change_vs_base": 0.24054449534809036,
+      "call_change_pct": 337.87504474393967,
+      "call_per_contract": 11690.168447844062
+    },
+    {
+      "scenario": "Weather: El Nino risk priced, no move yet",
+      "shock": "Vol 35% only",
+      "spot": 1.2,
+      "vol": 0.35,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.2181356775388628,
+      "call_bs": 0.10520124685942668,
+      "call_mc": 0.10487539096052642,
+      "call_mc_se": 0.0002525292244101708,
+      "put_bs": 0.1367485140146055,
+      "call_delta": 0.5102868823576462,
+      "call_change_vs_base": 0.034007916931675375,
+      "call_change_pct": 47.76840325657954,
+      "call_per_contract": 3945.0467572285006
+    },
+    {
+      "scenario": "Geopolitics: shipping disruption",
+      "shock": "Spot +5%, vol 32%, storage 3%",
+      "spot": 1.26,
+      "vol": 0.32,
+      "storage": 0.03,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.2918970518607804,
+      "call_bs": 0.13528130878840025,
+      "call_mc": 0.13497360514799894,
+      "call_mc_se": 0.00024618846683031913,
+      "put_bs": 0.09380113955905421,
+      "call_delta": 0.6112194398030646,
+      "call_change_vs_base": 0.06408797886064894,
+      "call_change_pct": 90.01963937588951,
+      "call_per_contract": 5073.049079565009
+    },
+    {
+      "scenario": "Geopolitics: tariffs / export curbs",
+      "shock": "Spot +10%, vol 35%",
+      "spot": 1.32,
+      "vol": 0.35,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.02,
+      "forward": 1.339949245292749,
+      "call_bs": 0.17570638018134732,
+      "call_mc": 0.17535496534197134,
+      "call_mc_se": 0.00028183618438114175,
+      "put_bs": 0.08665214483339805,
+      "call_delta": 0.6603778568658112,
+      "call_change_vs_base": 0.10451305025359602,
+      "call_change_pct": 146.8017444326011,
+      "call_per_contract": 6588.989256800524
+    },
+    {
+      "scenario": "Macro: rates rise to 4%",
+      "shock": "r = 4%",
+      "spot": 1.2,
+      "vol": 0.25,
+      "storage": 0.01,
+      "conv_yield": 0.0,
+      "rate": 0.04,
+      "forward": 1.2303781446293145,
+      "call_bs": 0.07634449313093543,
+      "call_mc": 0.07613953478291638,
+      "call_mc_se": 0.00016936261917654087,
+      "put_bs": 0.0955778097330984,
+      "call_delta": 0.502059463085285,
+      "call_change_vs_base": 0.005151163203184123,
+      "call_change_pct": 7.23545760313733,
+      "call_per_contract": 2862.9184924100787
+    }
+  ],
+  "sensitivity_carry": [
+    {
+      "conv_yield": -0.04,
+      "net_carry": 0.07,
+      "forward": 1.242743650559548,
+      "call": 0.0833658965373749
+    },
+    {
+      "conv_yield": -0.02,
+      "net_carry": 0.05,
+      "forward": 1.2303781446293145,
+      "call": 0.07711176804285746
+    },
+    {
+      "conv_yield": 0.0,
+      "net_carry": 0.03,
+      "forward": 1.2181356775388628,
+      "call": 0.0711933299277513
+    },
+    {
+      "conv_yield": 0.02,
+      "net_carry": 0.009999999999999998,
+      "forward": 1.206015025031281,
+      "call": 0.0656040721206585
+    },
+    {
+      "conv_yield": 0.04,
+      "net_carry": -0.010000000000000002,
+      "forward": 1.1940149750312188,
+      "call": 0.06033673298723546
+    },
+    {
+      "conv_yield": 0.06,
+      "net_carry": -0.03,
+      "forward": 1.182134327523675,
+      "call": 0.05538334411754645
+    },
+    {
+      "conv_yield": 0.08,
+      "net_carry": -0.05,
+      "forward": 1.1703718944339991,
+      "call": 0.050735281459057265
+    }
+  ]
+}
